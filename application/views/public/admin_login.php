@@ -3,6 +3,14 @@
 <?php echo form_open('login/admin_login', ["class"=>"form-horizontal"]); ?>
   <fieldset>
     <legend style="font-size: 24px; margin-left: 110px; margin-right: 100px;">Log In</legend>
+    <?php if($this->session->flashdata('login_failed')): ?>
+    	<div class="row">
+			<div class="alert alert-dismissible alert-danger col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-lg-4 col-md-4 col-sm-4">
+				  <button type="button" class="close" data-dismiss="alert">&times;</button>
+				  <strong>Oh snap!</strong> <?php echo "  ".$this->session->flashdata('login_failed'); ?>
+			</div>
+		</div>
+    <?php endif; ?>          
     <div class="form-group">
       <?php echo form_label('User Name','inputEmail', ["class"=>"labeltext col-lg-3 col-md-3 col-sm-3 control-label"]) ?>
       <div class="col-lg-4 col-md-4 col-sm-4">

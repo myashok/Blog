@@ -1,7 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Login extends MY_Controller {
-	public function index() {		
+	public function index() {
+		if($this->session->userdata('user_id'))
+			return redirect('admin/dashboard');		
 		$this->load->view('public/admin_login');
 	}
 	public function admin_login() {
@@ -17,11 +19,16 @@ class Login extends MY_Controller {
 				return redirect('admin/dashboard','refresh');
 			}
 			else {
-				echo "No record Found";
+				$this->session->set_flashdata('login_failed', 'Invalid login credentials');
+				return redirect('login');
 			}
 		}
 		else{
 			$this->load->view('public/admin_login');
 		}
+	}
+	public function admin_logout() {
+		$this->session->unset_userdata('user_id');
+		return redirect('login');
 	}
 }
