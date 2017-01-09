@@ -12,4 +12,24 @@ class Admin extends MY_Controller {
 			return redirect('login');			
 		}
 	}
+	public function add_article() {		 
+		$this->load->view('admin/add_article');
+	}
+	public function store_article() {
+		//echo "success";
+		$this->form_validation->set_rules('title', 'Article Title', 'required|alpha_dash');
+		$this->form_validation->set_rules('body', 'Article Body','required');		
+		if($this->form_validation->run()) {
+			echo "success";
+		}
+		else {		
+			$this->load->view('admin/add_article');	
+		}
+	}
+	public function edit_article() {
+
+	}
+	public function delete_article() {
+
+	}
 }

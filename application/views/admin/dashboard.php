@@ -1,10 +1,12 @@
 <?php include_once('admin_header.php') ?>
-<div class="container">
-	<table class="table">
+<a class="col-lg-1 col-lg-offset-8 btn btn-primary" href="<?php echo base_url('admin/add_article') ?>">Add Article</a>
+
+<div class="container col-lg-offset-3 col-lg-6" >
+	<table class="table table-striped table-hover ">
     	<thead>
-    		<th>Sr. No.</th>
-    		<th>Title</th>
-    		<th>Action</th>
+    		<th style="font-size: 24px; font-weight: bold" >Sr. No.</th>
+    		<th style="font-size: 24px; font-weight: bold"> Title</th>
+    		<th style="text-align:right;  font-size: 24px; font-weight: bold">Action</th>
     	</thead>
     	<tbody>
     	<?php if (count($articles)) : ?>
@@ -13,7 +15,7 @@
 	    			<td>1</td>
 	    			<td><?= $article->title ?></td>
 	    			<td>
-	    				<a href="" class="btn btn-primary">Edit</a><a href="" class="btn btn-danger">Delete</a>
+	    				<a href="" class="btn btn-primary pull-right">Edit</a><a href="" class="btn btn-danger  pull-right">Delete</a>
 	    			</td>
 	    		</tr>
     		<?php endforeach; ?>
