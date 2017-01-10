@@ -16,7 +16,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Public Articles</a>
+        <a class="navbar-brand" href="<?= base_url('user/index') ?>">Public Articles</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -28,7 +28,7 @@
       <button type="submit" class="btn btn-default">Search</button>
       <?= form_close(); ?>     
       <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Log In</a></li>
+          <li><a href="<?= base_url('login/index') ?>">Log In</a></li>
       </ul>
       <?= form_error("query") ?>
     </div>

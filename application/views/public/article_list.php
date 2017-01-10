@@ -16,8 +16,8 @@
                 <?php foreach($articles as $article) : ?>
                     <tr>
                         <td style="font-size: 16px;"><?= $i++; ?></td>
-                        <td style="font-size: 16px;"><?= $article->title ?></td>
-                        <td style="font-size: 16px; text-align: center"> Date</td>
+                        <td style="font-size: 16px; text-decoration: none;"><?=  anchor("user/article/{$article->id}",$article->title,["style"=>"text-decoration:none; font-weight:bold; color:Black; text-transform: capitalize;"])?></td>
+                        <td style="font-size: 16px; text-align: right"> <?= $article->created_at ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>

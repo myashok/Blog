@@ -44,15 +44,24 @@ class Admin extends MY_Controller {
 		$this->form_validation->set_rules('title', 'Article Title', 'required|alpha_numeric_spaces');
 		$this->form_validation->set_rules('body', 'Article Body','required');	
 
-		if($this->form_validation->run()) {
+		if($this->form_validation->run()) {			
+			print_r($post);
+			if(isset($_POST['edit'])) {
+				$var = 'Edit';
+				unset($_POST['edit']);
+			}
+			else 
+				$var = 'Add';	
 			unset($_POST['submit']);
-			$post = $this->input->post();			
+			$post = $this->input->post();
+			$post = $this->input->post();
+			print_r($post);		
 			$this->load->model('articlesModel','article');
 			if ($this->article->insertArticle($post)) {
-				$this->session->set_flashdata('feedback','Article Added Successfully');
+				$this->session->set_flashdata('feedback',"Article {$var}ed Successfully");
 				$this->session->set_flashdata('success','alert-success');
 			} else {
-				$this->session->set_flashdata('feedback','Article Failed to Add, Please Try Again');
+				$this->session->set_flashdata('feedback',"Article Failed to {$var}, Please Try Again");
 				$this->session->set_flashdata('success','alert-danger');
 			}
 			return redirect('admin/dashboard');
@@ -62,11 +71,12 @@ class Admin extends MY_Controller {
 		}
 	}
 	public function edit_article($articleid) {
-		$articles =  $this->article->findArticle($articleid);		
-		$this->load->view('admin/edit_article',['articles'=>$articles[0]]);
-	}
+		$articles =  $this->article->findArticle($articleid);
+		$this->article->deleteArticle($articleid);		
+		$this->load->view('admin/edit_article',['articles'=>$articles[0]]);		
+	}	
 	public function delete_article($articleid) {
-		 if($this->article->updateArticle($articleid)) {
+		 if($this->article->deleteArticle($articleid)) {
 		 	$this->session->set_flashdata('feedback','Article Deleted Successfully');
 		 	$this->session->set_flashdata('success','alert-success');
 		 }

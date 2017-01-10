@@ -68,4 +68,9 @@ class User extends MY_Controller {
 	 			$articles = $this->article->searchArticles($query, $config['per_page'], $this->uri->segment(4));
 	 			$this->load->view('public/search_list',compact('articles'));
 	 }
+	 public function article($articleid) {	 	
+	 	$this->load->model('articlesModel','articles');
+	 	$articles = $this->articles->find($articleid);	 	
+	 	$this->load->view('public/user_article',compact('articles'));
+	 }
 }

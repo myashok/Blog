@@ -3,6 +3,7 @@
 
 	<?php echo form_open('admin/store_article', ["class"=>"form-horizontal"]); ?>
   	<?php echo form_hidden('user_id', $this->session->userdata('user_id')); ?>
+    <?php echo form_hidden('created_at', date('Y-m-d H:i:s')); ?>
   <fieldset>
     <legend style="font-size: 24px; margin-left: 110px; margin-right: 100px;">Add  Articles</legend>    
     <div class="form-group">

@@ -14,10 +14,10 @@
             <?php if (count($articles)) : ?>
                 <?php $i = $this->uri->segment(4)+1 ?>
                 <?php foreach($articles as $article) : ?>
-                    <tr>
+                    <tr>                       
                         <td style="font-size: 16px;"><?= $i++; ?></td>
-                        <td style="font-size: 16px;"><?= $article->title ?></td>
-                        <td style="font-size: 16px; text-align: center"> Date</td>
+                        <td style="font-size: 16px;"><?=  anchor("user/article/{$article->id}",$article->title)?></td>
+                        <td style="font-size: 16px; text-align: right"> <?= $article->created_at?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>

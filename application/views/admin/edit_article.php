@@ -2,6 +2,10 @@
 	<div class="container col-lg-8 col-md-8 col-sm-8 col-lg-offset-2 col-md-offset-2 col-sm-offset-2">
 
 	<?php echo form_open('admin/store_article', ["class"=>"form-horizontal"]); ?>
+  <?php echo form_hidden('created_at', $articles['created_at']); ?>
+  <?php echo form_hidden('edit', 1); ?>
+  <?php echo form_hidden('user_id', $articles['user_id']); ?>
+
   <fieldset>
     <legend style="font-size: 24px; margin-left: 110px; margin-right: 100px;">Edit  Articles</legend>    
     <div class="form-group">
