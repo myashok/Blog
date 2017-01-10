@@ -12,7 +12,7 @@
             <tbody>
             
             <?php if (count($articles)) : ?>
-                <?php $i = $this->uri->segment(3)+1 ?>
+                <?php $i = $this->uri->segment(4)+1 ?>
                 <?php foreach($articles as $article) : ?>
                     <tr>
                         <td style="font-size: 16px;"><?= $i++; ?></td>
@@ -29,7 +29,7 @@
             <?php endif; ?>     
             </tbody>
         </table>
-       
+       <?= $this->pagination->create_links(); ?>
     </div>     
   </div>
 

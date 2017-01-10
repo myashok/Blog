@@ -26,11 +26,11 @@
           <input type="text" name='query' class="form-control" placeholder="Search">
         </div>
       <button type="submit" class="btn btn-default">Search</button>
-      <?= form_close(); ?>
-      <?= form_error("query") ?>
+      <?= form_close(); ?>     
       <ul class="nav navbar-nav navbar-right">
           <li><a href="#">Log In</a></li>
       </ul>
+      <?= form_error("query") ?>
     </div>
 </div>
 </nav>

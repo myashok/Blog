@@ -46,11 +46,19 @@ class articlesModel extends CI_Model {
 						->where('id', $articleid)
 						->delete();
 	}
-	public function searchArticles($query) {
+	public function searchArticles($query, $limit, $offset) {
+		$q = $this->db->select(['title','id'])
+					  ->from('articles')
+					  ->like('title',$query)
+					  ->limit($limit, $offset)
+					  ->get();
+		return $q->result();
+	}
+	public function searchRowCount($query) {
 		$q = $this->db->select(['title','id'])
 					  ->from('articles')
 					  ->like('title',$query)
 					  ->get();
-		return $q->result();
+		return $q->num_rows();
 	}
 }
