@@ -1,6 +1,6 @@
 <?php include('public_header.php'); ?>
   <div class="container">
-      <h1>All Articles</h1>
+      <h1>Searched Articles</h1>
       <hr>
       <div class="container col-lg-offset-3 col-lg-6" >
         <table class="table table-striped table-hover ">
@@ -29,7 +29,7 @@
             <?php endif; ?>     
             </tbody>
         </table>
-        <?= $this->pagination->create_links(); ?>
+       
     </div>     
   </div>
 
