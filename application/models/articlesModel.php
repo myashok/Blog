@@ -1,12 +1,21 @@
 <?php
 class articlesModel extends CI_Model {
-	public function getArticleList() {
+	public function getArticleList($limit, $offset) {
+		$user_id = $this->session->userdata('user_id');
+		$q = $this->db->select(['title','id'])
+					  ->from('articles')
+					  ->where('user_id',$user_id)
+					  ->limit($limit, $offset)
+					  ->get();
+	    return $q->result();
+	}
+	public function getRowCount() {
 		$user_id = $this->session->userdata('user_id');
 		$q = $this->db->select(['title','id'])
 					  ->from('articles')
 					  ->where('user_id',$user_id)
 					  ->get();
-	    return $q->result();
+	    return $q->num_rows();
 	}
 	public function insertArticle($array) {
 	    return $this->db->insert('articles', $array);

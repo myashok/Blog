@@ -18,7 +18,7 @@
     	<tbody>
     	
     	<?php if (count($articles)) : ?>
-    		<?php $i = 1 ?>
+    		<?php $i = $this->uri->segment(3)+1 ?>
     		<?php foreach($articles as $article) : ?>
 	    		<tr>
 	    			<td><?= $i++; ?></td>
@@ -38,5 +38,6 @@
     	<?php endif; ?> 	
     	</tbody>
     </table>
+    <?= $this->pagination->create_links(); ?>
 </div>
 <?php include_once('admin_footer.php') ?>
