@@ -14,6 +14,9 @@
  			<?= $articles->title ?>
  		</p>
  	</div>
+ 	<?php if(isset($articles->filepath)) : ?>
+ 	<div><img src="<?= $articles->filepath ?>" alt="Image" class="img-fluid img-thumbnail"></div>
+ 	<?php endif;?>
  </div>
 
 <?php include_once('public_footer.php') ?>

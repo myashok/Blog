@@ -40,23 +40,29 @@ class Admin extends MY_Controller {
 		$this->load->view('admin/add_article');
 	}
 	public function store_article() {
-		//echo "success";
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
+		$this->load->library('upload', $config);
 		$this->form_validation->set_rules('title', 'Article Title', 'required|alpha_numeric_spaces');
-		$this->form_validation->set_rules('body', 'Article Body','required');	
+		$this->form_validation->set_rules('body', 'Article Body','required');
+		if(isset($_POST['edit'])) {
+				$var = 'Edit';
+				$articleid = $_POST['id'];
+		}
 
-		if($this->form_validation->run()) {			
-			print_r($post);
+		if($this->form_validation->run() && $this->upload->do_upload('userfile')) {			
 			if(isset($_POST['edit'])) {
 				$var = 'Edit';
 				unset($_POST['edit']);
+				$articleid = $this->article->deleteArticle($_POST['id']);
+				unset($_POST['id']);	
 			}
 			else 
 				$var = 'Add';	
 			unset($_POST['submit']);
 			$post = $this->input->post();
-			$post = $this->input->post();
-			print_r($post);		
-			$this->load->model('articlesModel','article');
+			$data = $this->upload->data();
+			$post['filepath'] = base_url("uploads/".$data['file_name']);						
 			if ($this->article->insertArticle($post)) {
 				$this->session->set_flashdata('feedback',"Article {$var}ed Successfully");
 				$this->session->set_flashdata('success','alert-success');
@@ -66,13 +72,17 @@ class Admin extends MY_Controller {
 			}
 			return redirect('admin/dashboard');
 		}
-		else {		
-			$this->load->view('admin/add_article');	
+		else {
+			$upload_error =   $this->upload->display_errors();
+			if(isset($var) && $var == 'Edit')	{
+				$articles =  $this->article->findArticle($articleid);		
+				$this->load->view('admin/edit_article',['articles'=>$articles[0], 'upload_error'=> $upload_error]);		
+			}	
+			else $this->load->view('admin/add_article',compact('upload_error'));	
 		}
 	}
-	public function edit_article($articleid) {
-		$articles =  $this->article->findArticle($articleid);
-		$this->article->deleteArticle($articleid);		
+	public function edit_article($articleid) {		
+		$articles =  $this->article->findArticle($articleid);		
 		$this->load->view('admin/edit_article',['articles'=>$articles[0]]);		
 	}	
 	public function delete_article($articleid) {
